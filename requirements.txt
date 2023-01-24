@@ -1,0 +1,14 @@
+dwave_greedy==0.2.1
+dwave_neal==0.5.8
+greedy==0.1.1
+matplotlib==3.5.0
+numpy==1.21.4
+pyqubo==1.0.13
+qiskit==0.39.3
+qiskit_optimization==0.3.0
+qiskit_terra==0.20.1
+rectpack==0.2.1
+requests==2.26.0
+scipy==1.7.2
+Shapely==1.8.0
+svgnest==0.1
