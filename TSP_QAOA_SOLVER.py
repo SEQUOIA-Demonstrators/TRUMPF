@@ -361,7 +361,7 @@ class TSP_QAOA_SOLVER:
         results_dict = self.optimizer_backend.run(bound_qc, seed_simulator=10, nshots=self.num_shots).result().get_counts()
         # compute the expected length of the paths using the results collected
         expectation = self.compute_expectation(results_dict)
-        print("Circuit ran! Expectation: ", expectation, end="\r")
+        #print("Circuit ran! Expectation: ", expectation, end="\r")
         # return the expected value
         return expectation
 

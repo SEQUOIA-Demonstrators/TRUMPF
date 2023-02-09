@@ -1187,9 +1187,9 @@ class QUANTUM_PACKER():
         # return the aggregated clusters
         return clusters
 
-    def stochastic_agglomerative_clustering(self, D, distance_threshold, max_cluster_size, max_num_trials=1000):
+    def stochastic_agglomerative_clustering(self, D, distance_threshold, max_cluster_size, max_num_trials=500):
         """
-        Stochastic version of the single-linakge clustering algorithm.
+        Stochastic version of the single-linkage clustering algorithm.
 
         :param D: distance matrix
         :param distance_threshold: maxmium distance allowed for linking to clusters
@@ -1221,7 +1221,6 @@ class QUANTUM_PACKER():
         partitions_dict.update({make_name_from_partition(partition): partition})
 
         num_trials = 0
-        max_num_trials = 500
         while num_trials < max_num_trials:
             num_trials += 1
             # pick randomly a partition
@@ -1499,8 +1498,7 @@ class QUANTUM_PACKER():
         gi_thresholds.sort()
 
         print('Partitioning the set of pieces using stochastic agglomerative clustering:')
-        partitions = self.stochastic_agglomerative_clustering(GI, self.distance_threshold, self.max_cluster_size,
-                                                              self.n_partitions)
+        partitions = self.stochastic_agglomerative_clustering(GI, self.distance_threshold, self.max_cluster_size, self.n_partitions)
 
         # Compute the partitions support, i.e. the set of sets of pieces that appear in the partitions
         partitions_support = []
@@ -1570,19 +1568,12 @@ class QUANTUM_PACKER():
                 P = problem_pieces[p]
                 shortest_path, minimum_length = QUANTUM_PACKER.solve_TSP_by_brute_force(D)
                 print('--- BRUTE FORCE TSP SOLVER ---')
-                print('Pieces:')
-                print(P)
-                print('D=')
-                print(D)
-                print('shortest hamiltonian path=')
+                print('Pieces:', P)
+                print('D=', D)
                 solution = [P[i] for i in shortest_path]
-                print(solution)
-                print('minimum distance=')
-                print(minimum_length)
-                print('----------')
-                print(minimum_length)
+                print('shortest hamiltonian path=', solution)
+                print('minimum distance=', minimum_length)
                 best_hamiltonian_paths.update({problem_name: [solution, minimum_length]})
-
         TSP_time = time.perf_counter()
 
         # Store for all sets of pieces (key) the corresponding sequence of pieces to pack
